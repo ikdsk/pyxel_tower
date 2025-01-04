@@ -5,7 +5,7 @@ import json
 
 # 画面サイズ
 SCREEN_WIDTH = 160
-SCREEN_HEIGHT = 220
+SCREEN_HEIGHT = 200
 
 # プレイヤーの初期位置とパラメータ
 PLAYER_X = 72
@@ -51,10 +51,10 @@ class Player:
         # ジャンプ
         if (
             pyxel.btnp(pyxel.KEY_SPACE)
-            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_A)
-            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_B)
-            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_X)
-            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_Y)
+            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A)
+            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B)
+            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X)
+            or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y)
             ) and not self.is_jumping:
             pyxel.sounds[3].set(
                 "D3G3",  # ドミソの和音で明るい感じに
@@ -219,10 +219,10 @@ class App:
             # ゲームオーバー時の処理 (リトライなど)
             if (
                 pyxel.btnp(pyxel.KEY_R)
-                or pyxel.btn(pyxel.GAMEPAD1_BUTTON_A)
-                or pyxel.btn(pyxel.GAMEPAD1_BUTTON_B)
-                or pyxel.btn(pyxel.GAMEPAD1_BUTTON_X)
-                or pyxel.btn(pyxel.GAMEPAD1_BUTTON_Y)
+                or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A)
+                or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B)
+                or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X)
+                or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_Y)
                 ):  # Rキーでリトライ
                 self.reset_game()
 
@@ -274,7 +274,7 @@ class App:
 
         if self.is_game_over:  # ゲームオーバー時の表示
             pyxel.text(SCREEN_WIDTH // 2 - 20, SCREEN_HEIGHT // 2 - 8, "GAME OVER", pyxel.frame_count % 15 + 1)
-            pyxel.text(SCREEN_WIDTH // 2 - 30, SCREEN_HEIGHT // 2 + 8, "PRESS R TO RETRY", 8)
+            pyxel.text(SCREEN_WIDTH // 2 - 30, SCREEN_HEIGHT // 2 + 8, "PRESS BUTTON TO RETRY", 8)
         else:
             self.player.draw()
 

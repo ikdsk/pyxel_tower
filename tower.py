@@ -5,7 +5,7 @@ import json
 
 # 画面サイズ
 SCREEN_WIDTH = 160
-SCREEN_HEIGHT = 120
+SCREEN_HEIGHT = 220
 
 # プレイヤーの初期位置とパラメータ
 PLAYER_X = 72
@@ -43,13 +43,19 @@ class Player:
 
     def update(self):
         # 左右移動
-        if pyxel.btn(pyxel.KEY_LEFT):
+        if (pyxel.btn(pyxel.KEY_LEFT) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_LEFT)):
             self.x -= PLAYER_SPEED
-        if pyxel.btn(pyxel.KEY_RIGHT):
+        if (pyxel.btn(pyxel.KEY_RIGHT) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_DPAD_RIGHT)):
             self.x += PLAYER_SPEED
 
         # ジャンプ
-        if pyxel.btnp(pyxel.KEY_SPACE) and not self.is_jumping:
+        if (
+            pyxel.btnp(pyxel.KEY_SPACE)
+            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_A)
+            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_B)
+            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_X)
+            or pyxel.btn(pyxel.GAMEPAD1_BUTTON_Y)
+            ) and not self.is_jumping:
             pyxel.sounds[3].set(
                 "D3G3",  # ドミソの和音で明るい感じに
                 "S",  # トライアングル系の音色で軽快さを出す
@@ -211,7 +217,13 @@ class App:
 
         else:
             # ゲームオーバー時の処理 (リトライなど)
-            if pyxel.btnp(pyxel.KEY_R):  # Rキーでリトライ
+            if (
+                pyxel.btnp(pyxel.KEY_R)
+                or pyxel.btn(pyxel.GAMEPAD1_BUTTON_A)
+                or pyxel.btn(pyxel.GAMEPAD1_BUTTON_B)
+                or pyxel.btn(pyxel.GAMEPAD1_BUTTON_X)
+                or pyxel.btn(pyxel.GAMEPAD1_BUTTON_Y)
+                ):  # Rキーでリトライ
                 self.reset_game()
 
         # Play music
